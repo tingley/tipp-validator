@@ -1,0 +1,8 @@
+@(filename : String, tipp : com.globalsight.tip.TIPP, status : com.globalsight.tip.TIPPLoadStatus)
+
+@import com.globalsight.tip._
+
+@main("TIPP 1.5 Validator") {
+<h1>@filename</h1>
+<p>@status.getAllErrors().size() errors.</p>
+}
