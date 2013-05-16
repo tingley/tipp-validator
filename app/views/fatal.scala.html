@@ -1,0 +1,56 @@
+@(filename : String, tipp : com.globalsight.tip.TIPP, status : com.globalsight.tip.TIPPLoadStatus)
+
+@import com.globalsight.tip._
+
+@main("TIPP 1.5 Validator") {
+	@if(status.getAllErrors().size() == 0) {
+		<h1>@filename looks good.</h1>
+		<div class="row" id="tipp-task">
+			<h4>Here's information about the task:</h4>
+			@if(StandardTaskType.forTypeUri(tipp.getTaskType()) != null) {
+			    This is a <em>standard task</em>, <code>@StandardTaskType.forTypeUri(tipp.getTaskType())</code>.
+			} else {
+				This is a <em>custom task</em> identified by the URI <code>@tipp.getTaskType()</code>.			
+			}
+			<br/>
+		    The package is a <strong>@if(tipp.isRequest()) { request } else { response }</strong>, with 
+		    source locale <strong>@tipp.getSourceLocale()</strong> and target locale <strong>@tipp.getTargetLocale()</strong>.
+		</div>
+		<div class="row" id="tipp-metadata">
+			<h4>Here's additional info from the TIPP manifest:</h4>
+			<dl class="dl-horizontal">
+				<dt>Package ID</dt>
+				<dd>@tipp.getPackageId()</dd>
+			</dl>
+		</div>
+		<div class="row" id="tipp-contents">
+		<h4>Here's what was inside:</h4>
+		<table>
+			<tr>
+				<th>Resource Type</th>
+				<th>Resource Name</th>
+				<th>Sequence</th>
+			</tr>
+		@for(section <- tipp.getSections()) {
+			@for(resource <- section.getResources()) {			
+			<tr>
+				<td>@section.getType()</td>
+				<td>@resource.getName()</td>
+				<td>@resource.getSequence()</td>
+			</tr>
+			}
+		}
+		</table>
+		</div>
+	} else {
+		<p>status.getAllErrors().size() errors.</p>
+		<table>
+		@for(error <- status.getAllErrors()) {
+			<tr>
+				<td>@error.getErrorType()</td>
+				<td>@error.getMessage()</td>
+			</tr>	
+		}
+		</table>
+	}
+}

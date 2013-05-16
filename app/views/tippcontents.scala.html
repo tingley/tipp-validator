@@ -1,0 +1,23 @@
+@(tipp : com.globalsight.tip.TIPP)
+
+@import com.globalsight.tip._
+
+<div class="row" id="tipp-contents">
+	<h4>Here's what was inside:</h4>
+	<table>
+		<tr>
+			<th>Resource Type</th>
+			<th>Resource Name</th>
+			<th>Sequence</th>
+		</tr>
+	@for(section <- tipp.getSections()) {
+		@for(resource <- section.getResources()) {			
+		<tr>
+			<td>@section.getType()</td>
+			<td>@resource.getName()</td>
+			<td>@resource.getSequence()</td>
+		</tr>
+		}
+	}
+	</table>
+</div>

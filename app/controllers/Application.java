@@ -35,7 +35,17 @@ public class Application extends Controller {
 	    	InputStream is = new BufferedInputStream(new FileInputStream(file.getFile()));
 	    	TIPP tipp = TIPPFactory.openFromStream(is, new InMemoryBackingStore(), loadStatus);
 	    	is.close();
-	    	return ok(validate.render(fileName, tipp, loadStatus));
+	    	switch (loadStatus.getSeverity()) {
+	    	case NONE:
+	    		return ok(valid.render(fileName, tipp, loadStatus));
+	    	case WARN:
+	    		return ok(warn.render(fileName, tipp, loadStatus));
+	    	case ERROR:
+	    		return ok(error.render(fileName, tipp, loadStatus));
+	    	case FATAL:
+	    		return ok(fatal.render(fileName, tipp, loadStatus));
+	    	}
+	    	return TODO; // XXX Shouldn't ever happen
     	}
     	catch (IOException e) {
     		flash("error", "Error reading file: " + e.getMessage());

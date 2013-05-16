@@ -1,0 +1,20 @@
+@(tipp : com.globalsight.tip.TIPP)
+
+@import com.globalsight.tip._
+
+<div class="row" id="tipp-metadata">
+	<h4>Here's additional info from the TIPP manifest:</h4>
+	<dl class="dl-horizontal">
+		<dt>Package ID</dt>
+		<dd>@tipp.getPackageId()</dd>
+		<dt>Package Creator</dt>
+		<!--  TODO: escape this -->
+		<dd>@tipp.getCreator().getName() (@tipp.getCreator().getId())</dd>
+		<dt>Created on:</dt>
+		<dd>@tipp.getCreator().getDate()</dd>
+		<dt>Created with</dt>
+		<dd>@tipp.getCreator().getTool().getName() 
+			version @tipp.getCreator().getTool().getVersion() 
+			(@tipp.getCreator().getTool().getId())</dd>
+	</dl>
+</div>

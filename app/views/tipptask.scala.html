@@ -1,0 +1,15 @@
+@(tipp : com.globalsight.tip.TIPP)
+
+@import com.globalsight.tip._
+
+<div class="row" id="tipp-task">
+	<h4>Here's information about the task:</h4>
+	@if(StandardTaskType.forTypeUri(tipp.getTaskType()) != null) {
+	    This is a <em>standard task</em>, <code>@StandardTaskType.forTypeUri(tipp.getTaskType())</code>.
+	} else {
+		This is a <em>custom task</em> identified by the URI <code>@tipp.getTaskType()</code>.			
+	}
+	<br/>
+    The package is a <strong>@if(tipp.isRequest()) { request } else { response }</strong>, with 
+    source locale <strong>@tipp.getSourceLocale()</strong> and target locale <strong>@tipp.getTargetLocale()</strong>.
+</div>
