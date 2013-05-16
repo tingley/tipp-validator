@@ -1,0 +1,19 @@
+@(status : com.globalsight.tip.TIPPLoadStatus)
+
+<div class="row" id="tipp-errors">
+	<h4>Here is a list of all the problems found in this package:</h4>
+	<table class="table">
+		<tr>
+			<th>Severity</th>
+			<th>Error</th>
+			<th>Additional Information</th>
+		</tr>
+	@for(error <- status.getAllErrors()) {
+		<tr>
+			<td>@error.getErrorType().getSeverity()</td>
+			<td>@error.getErrorType()</td>
+			<td>@error.getMessage()</td>
+		</tr>
+	}
+	</table>
+</div>
