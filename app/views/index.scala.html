@@ -7,10 +7,14 @@
     <h1>TIPP 1.5 Validator</h1>
     <p>Use this document as a way to quick start any new project.<br> All you get is this message and a barebones HTML document.</p>
 
-    <h2>Choose a TIPP to Validate</h2>
     @helper.form(action = routes.Application.validate(),
                  'enctype -> "multipart/form-data") {
-        <input type="file" name="tippupload">
-        <input type="submit" class="btn primary">
+        <fieldset>
+	    <legend>Choose a TIPP to Validate</legend>
+	    <label class="file">
+	        <input type="file" name="tippupload">
+        </label>
+        <button type="submit" class="btn">Submit</button>
+        </fieldset>
     }
 }

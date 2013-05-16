@@ -3,5 +3,15 @@
 @import com.globalsight.tip._
 
 @main("TIPP 1.5 Validator") {
-	<h1>@filename is ok, but not quite right.</h1>
+	<h1>@filename is mostly ok, but not quite right.</h1>
+	<div class="row">
+		I was able to extract a lot of information about your TIPP.  Unfortunately,
+		just because I <em>can</em> extract that information, doesn't mean I <em>should</em>.
+		Which is another way of saying that this TIPP had one or more minor spec violations, 
+		and is technically non-compliant.
+	</div>
+	@tipperrors(status)
+	@tipptask(tipp)
+	@tippmetadata(tipp)
+	@tippcontents(tipp)
 }
