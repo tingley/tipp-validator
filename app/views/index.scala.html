@@ -1,12 +1,12 @@
 @()
 @import helper._
-@import helper.twitterBootstrap._
 
 @main("TIPP 1.5 Validator") {
 
     <h1>TIPP 1.5 Validator</h1>
-    <p>Use this document as a way to quick start any new project.<br> All you get is this message and a barebones HTML document.</p>
-
+    <p>This tool will validate TIPP packages against the 
+       <a href="https://code.google.com/p/interoperability-now/wiki/TIPP15">TIPP 1.5</a> schema
+       and perform additional conformance checks as required by the specification.</p>
     @helper.form(action = routes.Application.validate(),
                  'enctype -> "multipart/form-data") {
         <fieldset>
