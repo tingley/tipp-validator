@@ -1,20 +1,35 @@
 @(tipp : com.globalsight.tip.TIPP)
 
-@import com.globalsight.tip._
+@import com.globalsight.tip.ResponseTIPP
 
 <div class="row" id="tipp-metadata">
 	<h4>Here's additional info from the TIPP manifest:</h4>
 	<dl class="dl-horizontal">
 		<dt>Package ID</dt>
 		<dd>@tipp.getPackageId()</dd>
-		<dt>Package Creator</dt>
-		<!--  TODO: escape this -->
+		<dt>Created by</dt>
 		<dd>@tipp.getCreator().getName() (@tipp.getCreator().getId())</dd>
-		<dt>Created on:</dt>
+		<dt>Created on</dt>
 		<dd>@tipp.getCreator().getDate()</dd>
 		<dt>Created with</dt>
 		<dd>@tipp.getCreator().getTool().getName() 
 			version @tipp.getCreator().getTool().getVersion() 
 			(@tipp.getCreator().getTool().getId())</dd>
 	</dl>
+	@if(!tipp.isRequest()) {
+		This package was <em>in response to:</em>
+		<dl class="dl-horizontal">
+			<dt>Package ID</dt>
+			<dd>@tipp.asInstanceOf[ResponseTIPP].getRequestPackageId()</dd>
+			<dt>Created by</dt>
+			<dd>@tipp.asInstanceOf[ResponseTIPP].getRequestCreator().getName() 
+			    (@tipp.asInstanceOf[ResponseTIPP].getRequestCreator().getId())</dd>
+			<dt>Created on</dt>
+			<dd>@tipp.asInstanceOf[ResponseTIPP].getRequestCreator().getDate()</dd>
+			<dt>Created with</dt>
+			<dd>@tipp.asInstanceOf[ResponseTIPP].getRequestCreator().getTool().getName() 
+				version @tipp.asInstanceOf[ResponseTIPP].getRequestCreator().getTool().getVersion() 
+				(@tipp.asInstanceOf[ResponseTIPP].getRequestCreator().getTool().getId())</dd>
+		</dl>
+	}
 </div>
