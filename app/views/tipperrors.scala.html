@@ -12,7 +12,12 @@
 		<tr>
 			<td>@error.getErrorType().getSeverity()</td>
 			<td>@error.getErrorType()</td>
-			<td>@error.getMessage()</td>
+            @if(error.getException() != null && 
+            error.getException().isInstanceOf[org.xml.sax.SAXParseException]) {
+            <td>@error.getMessage(): @error.getException().getMessage()</td>
+            } else {
+            <td>@error.getMessage()</td>
+            }
 		</tr>
 	}
 	</table>
